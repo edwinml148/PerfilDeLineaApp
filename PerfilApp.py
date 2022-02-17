@@ -1,5 +1,3 @@
-
-from dataclasses import dataclass
 import streamlit as st
 import numpy as np
 import matplotlib.pyplot as plt
@@ -7,7 +5,7 @@ import pandas as pd
 import cv2
 
 def main():
-    st.title('Analizando imagenes del fondo optico ocular!!!')
+    st.title('Analizando el perfil de linea en imagenes!!!')
     st.sidebar.header('Parametros')
 
     #funcion para poner los parametrso en el sidebar
@@ -21,18 +19,16 @@ def main():
         return features
 
     
-    x1 = "PerfilDelianApp es una WebApp con la cual podras seleccionar una parte de la imagen para analizarla y mostrar el perfil de linea.\n Los parametros son :\n\n"
-    x2 = "$x$ : Abscisa del recorte de la imagen \n\n"
-    x3 = "$y$ : Ordenada del recorte de la imagen \n\n"
-    x4 = "$Lado$ : Cantidad de pixeles en el recorte\n\n"
-    x5 = "$Perfil$ : La fila del recorte de la imagen que se dibujara"
-    st.subheader(x1+x2+x3+x4+x5)
-    #st.subheader(x1)
-    #st.text(x2+x3+x4+x5)
-    #st.latex(r'''Hola mundo''')
-    #st.write(df)
+    st.write(""" 
+    PerfilDelineApp es una WebApp con la cual podras seleccionar una parte de la imagen para analizarla y mostrar el perfil de linea.
 
-    uploaded_file = st.file_uploader("",type="jpg")
+    $x$ : Abscisa del recorte de la imagen\n
+    $y$ : Ordenada del recorte de la imagen\n
+    $Lado$ : Cantidad de pixeles en el recorte\n
+    $Perfil$ : La fila del recorte de la imagen que se dibujara\n
+    """)
+    
+    uploaded_file = st.sidebar.file_uploader("Suba una imagen en formato jpg ...",type="jpg")
 
     if uploaded_file is not None:
         # Convert the file to an opencv image.
@@ -101,8 +97,9 @@ def main():
         fig = plt.figure(figsize=(20,8))
         ax = fig.subplots(1,2)
         q= opencv_image[y:y+long,x:x+long]
-        ax[0].set_title("Recorte de la imagen - banda verde")
-        ax[0].imshow(q[:,:,1],cmap='gray')
+        ax[0].set_title("Recorte de la imagen en escala de grises")
+        #ax[0].imshow(q[:,:,1],cmap='gray')
+        ax[0].imshow(cv2.cvtColor(q, cv2.COLOR_RGB2GRAY),cmap='gray')
         ax[0].plot(x_blanca,y_blanca,'--r')
         #ax[1].axis("off")
 
