@@ -55,8 +55,8 @@ def main():
         #print(dim_img[0]-x , dim_img[1]-y)
         max_l = min(dim_img[1]-x-52,dim_img[0]-y-52)
 
-        print(x,dim_img[1]-52)
-        print("hola mubndo",max_l)
+        print("dimension de la imagen : ",dim_img)
+        #print("hola mubndo",max_l)
         if ( (x ==dim_img[1]-52) or (y ==dim_img[0]-52)  ):
             print("hola 2")
             long = st.sidebar.slider('lado',48,50,49)
