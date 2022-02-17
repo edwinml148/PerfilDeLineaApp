@@ -104,7 +104,8 @@ def main():
         #ax[1].axis("off")
 
         ax[1].set_title("Perfil de linea")
-        ax[1].plot(q[0:long,z,1],color='b')
+        #ax[1].plot(q[0:long,z,1],color='b')
+        ax[1].plot(q[z,0:long,1],color='b')
         #ax[2].axis("off")
 
         st.pyplot(fig2)
